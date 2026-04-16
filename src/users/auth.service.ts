@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { randomBytes,scrypt as _scrypt } from "crypto";
 import { promisify } from "util";
+import { User } from "./user.entity";
 
 const scrypt = promisify(_scrypt);
 
@@ -34,7 +35,7 @@ export class AuthService{
         //create new use & sve it
         //return the user
          
-
+        return user;
         
 
     }
@@ -52,4 +53,6 @@ export class AuthService{
         }
         return user;
     }
+
+    
 }
