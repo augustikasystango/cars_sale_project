@@ -6,6 +6,7 @@ import { CurrentUser } from 'src/users/decorators/current-user.decorator';
 import { User } from 'src/users/user.entity';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { ReportDto } from './dtos/report.dto';
+import { ApprovedReportDto } from './dtos/approved-report.dto';
 
 @UseGuards(AuthGuard)
 @Controller('reports')
@@ -29,9 +30,12 @@ export class ReportsController {
     //     return this.reportsService.getReport(parseInt(id));
     // }
 
-    // @Patch('/:id')
-    // updateReport(@Param('id') id: string, @Body() body: UpdateReportDto){
-    //     return this.reportsService.updateReport(parseInt(id), body);
-    // }
+    @Patch('/:id')
+    approveReport(@Param('id') id: string, @Body() body: ApprovedReportDto){
+        return this.reportsService.changeApproval(parseInt(id), body.approved);
+    }
     
 }
+
+
+    // const report = await this.repo.findOne({ where: { id: parseInt(id) } });

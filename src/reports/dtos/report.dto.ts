@@ -18,6 +18,8 @@ export class ReportDto{
     lat: number;
     @Expose()
     lng: number;
+    @Expose()
+    approved: boolean;
     // we want to expose the userId property to the client, but we don't want to expose the entire user object, so we can use the @Transform decorator to transform the user object to just the userId property.
     //obj is a refrence to an original repport entity instance, and we are checking if the user property exists on the report entity instance, if it does we are returning the user id, otherwise we are returning null.
     @Transform(({ obj }) => obj.user ? obj.user.id : null)

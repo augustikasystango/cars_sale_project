@@ -18,8 +18,8 @@ export class Report{
     price: number;
     @Column()
     mileage: number;
-    // @Column()
-    // approved: boolean;
+    @Column({default: false})
+    approved: boolean;
     @Column()
     lat: number;
     @Column()
