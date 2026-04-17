@@ -6,36 +6,34 @@ import { CreatUserDto, UpdateUserDto } from './dtos/create-user.dto';
 
 @Injectable()
 export class UsersService {
- 
-    constructor(@InjectRepository(User) private repo: Repository<User>){
-}
-create(@Body() body: CreatUserDto){
+  constructor(@InjectRepository(User) private repo: Repository<User>) {}
+  create(@Body() body: CreatUserDto) {
     const user = this.repo.create(body);
-    return this.repo.save(user); 
-} 
+    return this.repo.save(user);
+  }
 
-findOne(id:number){
-    if(!id){
-        return null;
+  findOne(id: number) {
+    if (!id) {
+      return null;
     }
     return this.repo.findOneBy({id});
-}
-find(email: string){
+  }
+  find(email: string) {
     return this.repo.find({ where: { email } });
-}
-async update(id: number, attrs: UpdateUserDto){
-  const user = await this.findOne(id);
-    if(!user){
+  }
+  async update(id: number, attrs: UpdateUserDto) {
+    const user = await this.findOne(id);
+    if (!user) {
       throw new NotFoundException('user not found');
     }
     Object.assign(user, attrs);
     return this.repo.save(user);
-}
-async remove(id:number){
+  }
+  async remove(id: number) {
     const user = await this.findOne(id);
-    if(!user){
-        throw new NotFoundException('user not found');
+    if (!user) {
+      throw new NotFoundException('user not found');
     }
     return this.repo.remove(user);
-}
+  }
 }

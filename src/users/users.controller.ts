@@ -38,7 +38,6 @@ export class UsersController {
 
   @Post('/signup')
   async createUser(@Body() body: CreatUserDto,@Session() session: any) {
-    console.log(body);
     const user = await this.authService.signup(body.email, body.password);
     session.userId = user.id;
 
@@ -56,7 +55,6 @@ export class UsersController {
   @Get('/whoami')
   //making a custom parameter decorator to get the user data from the session, and we can use it in any route handler that we want to get the user data from the session.
   whoAmI(@CurrentUser() user: User) {
-    console.log(user,"---user in whoami route handler");
     return user;
   }
 
